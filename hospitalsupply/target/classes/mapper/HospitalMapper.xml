@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.HospitalMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.pojo.Hospital">
+            <id property="hospitalid" column="hospitalid" jdbcType="VARCHAR"/>
+            <result property="whitelistid" column="whitelistid" jdbcType="VARCHAR"/>
+            <result property="hospitalname" column="hospitalname" jdbcType="VARCHAR"/>
+            <result property="hosUsci" column="hos_usci" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        hospitalid,whitelistid,hospitalname,hos_usci,password
+    </sql>
+    <update id="updateByHospitalId" parameterType="com.cuit.hospitalsupply.pojo.Hospital">
+        update t_hospital
+        set whitelistid=#{whitelistid},hospitalname=#{hospitalname},hos_usci=#{hosUsci},password=#{password}
+        where hospitalid=#{hospitalid}
+    </update>
+</mapper>

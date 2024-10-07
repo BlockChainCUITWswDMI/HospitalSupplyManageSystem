@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.ContractShowModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.vo.response.ContractShowModel">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="contractid" column="contractid" jdbcType="VARCHAR"/>
+            <result property="whitelistid" column="whitelistid" jdbcType="VARCHAR"/>
+            <result property="supplierid" column="supplierid" jdbcType="VARCHAR"/>
+            <result property="suppliername" column="suppliername" jdbcType="VARCHAR"/>
+            <result property="hospitalid" column="hospitalid" jdbcType="VARCHAR"/>
+            <result property="hospitalname" column="hospitalname" jdbcType="VARCHAR"/>
+            <result property="deposit" column="deposit" jdbcType="INTEGER"/>
+            <result property="dedit" column="dedit" jdbcType="INTEGER"/>
+            <result property="createDate" column="create_date" jdbcType="DATE"/>
+            <result property="udi" column="udi" jdbcType="VARCHAR"/>
+            <result property="instrumentname" column="instrumentname" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="INTEGER"/>
+            <result property="orderid" column="orderid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,contractid,whitelistid,
+        supplierid,suppliernmae,hospitalid,hospitalname,deposit,
+        dedit,createDate,udi,instrumentname,amount,orderid
+    </sql>
+
+    <select id="findContractPage" resultType="com.cuit.hospitalsupply.vo.response.ContractShowModel">
+        select c.id,c.contractid,c.whitelistid,c.supplierid,s.suppliername,c.hospitalid,h.hospitalname,c.deposit,c.dedit,c.orderid,
+        c.create_date,c.udi,i.instrumentname,c.amount from t_contract c
+            left join t_supplier s on s.supplierid = c.supplierid
+            left join t_hospital h on h.hospitalid = c.hospitalid
+            left join t_instrument i on i.udi = c.udi
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+</mapper>

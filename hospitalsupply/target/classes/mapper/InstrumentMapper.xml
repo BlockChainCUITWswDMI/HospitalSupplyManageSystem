@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.InstrumentMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.pojo.Instrument">
+            <id property="instrumentid" column="instrumentid" jdbcType="VARCHAR"/>
+            <result property="supplierid" column="supplierid" jdbcType="VARCHAR"/>
+            <result property="instrumentname" column="instrumentname" jdbcType="VARCHAR"/>
+            <result property="udi" column="udi" jdbcType="VARCHAR"/>
+            <result property="productionTime" column="production_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        instrumentid,supplierid,instrumentname,udi,production_time
+    </sql>
+    <update id="updateByInstrumentId" parameterType="com.cuit.hospitalsupply.pojo.Instrument">
+        update t_instrument
+        set supplierid=#{supplierid},instrumentname=#{instrumentname},udi=#{udi}, production_time=#{productionTime}
+        where instrumentid=#{instrumentid}
+    </update>
+    <delete id="deleteByInstrumentId" parameterType="java.lang.String">
+        delete from t_instrument where instrumentid=#{instrumentid}
+    </delete>
+</mapper>

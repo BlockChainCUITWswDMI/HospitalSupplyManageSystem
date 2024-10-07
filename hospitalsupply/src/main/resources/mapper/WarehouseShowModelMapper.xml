@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.WarehouseShowModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.vo.response.WarehouseShowModel">
+            <id property="warehouseid" column="warehouseid" jdbcType="VARCHAR"/>
+            <result property="hospitalid" column="hospitalid" jdbcType="VARCHAR"/>
+            <result property="hospitalname" column="hospitalname" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="INTEGER"/>
+            <result property="addDate" column="add_date" jdbcType="DATE"/>
+            <result property="updateDate" column="update_date" jdbcType="DATE"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="instrumentid" column="instrumentid" jdbcType="VARCHAR"/>
+            <result property="instrumentname" column="instrumentname" jdbcType="VARCHAR"/>
+            <result property="suppliername" column="suppliername" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        warehouseid,hospitalid,hospitalname,amount,
+        add_date,update_date,status,
+        instrumentid,instrumentname,suppliername
+    </sql>
+    <select id="findWarehousePage" resultType="com.cuit.hospitalsupply.vo.response.WarehouseShowModel">
+        select w.warehouseid, w.hospitalid, h.hospitalname, w.amount, w.add_date, w.update_date,
+               w.status, i.instrumentid, i.instrumentname, s.suppliername
+        from t_warehouse w
+        LEFT JOIN t_hospital h on h.hospitalid = w.hospitalid
+        left join t_instrument i on i.instrumentid = w.instrumentid
+        left join t_supplier s on s.supplierid = i.supplierid
+        <if test="ew != null">
+                ${ew.customSqlSegment}
+        </if>
+    </select>
+
+</mapper>

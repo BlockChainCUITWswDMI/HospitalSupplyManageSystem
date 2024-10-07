@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.SupplierMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.pojo.Supplier">
+            <id property="supplierid" column="supplierid" jdbcType="VARCHAR"/>
+            <result property="suppliername" column="suppliername" jdbcType="VARCHAR"/>
+            <result property="supusci" column="supusci" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        supplierid,suppliername,supusci,
+        password
+    </sql>
+    <insert id="create">
+        insert into t_supplier (supplierid,suppliername,supusci,password)
+        values (#{supplierid},#{suppliername},#{supusci},#{password})
+    </insert>
+    <update id="updateBySupplierId" parameterType="com.cuit.hospitalsupply.pojo.Supplier">
+        update t_supplier
+        set suppliername=#{suppliername},supusci=#{supusci},password=#{password}
+        where supplierid=#{supplierid}
+    </update>
+
+    <select id="findSupplierPage" resultType="com.cuit.hospitalsupply.pojo.Supplier">
+        select s.supplierid, s.suppliername,s.supusci,s.password, h.whitelistid from t_supplier s
+            left join t_supplierwhitelist sw on s.supplierid = sw.supplierid
+            left JOIN t_whitelist w on sw.whitelistid = w.whitelistid
+            LEFT JOIN t_hospital h on h.whitelistid = w.whitelistid
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+
+    </select>
+</mapper>

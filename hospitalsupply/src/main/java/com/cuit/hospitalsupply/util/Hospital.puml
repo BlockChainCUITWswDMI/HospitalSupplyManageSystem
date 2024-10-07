@@ -1,0 +1,56 @@
+@startuml
+
+class Hospital {
+    - username: string
+    - password: string
+    + login()
+    + addSupplierInfo()
+    + addToWhiteList(supplierID: int)
+    + modifySupplierInfo(supplierID: int)
+    + deleteSupplierInfo(supplierID: int)
+    + addContract()
+}
+
+class Supplier {
+    - username: string
+    - password: string
+    + login()
+    + modifySupplierInfo()
+    + signContract(contractID: int)
+}
+
+class Device {
+    - deviceID: int
+    - name: string
+    - model: string
+    - specification: string
+    - quantity: int
+    - status: string
+    + addDeviceInfo()
+    + modifyDeviceInfo(deviceID: int)
+    + deleteDeviceInfo(deviceID: int)
+}
+
+class Contract {
+    - contractID: int
+    - details: string
+    - blockchainInfo: string
+    + queryContract()
+}
+
+class Inventory {
+    - deviceList: List<Device>
+    + addDevice(device: Device)
+    + removeDevice(deviceID: int)
+    + updateDeviceQuantity(deviceID: int, quantity: int)
+}
+
+Hospital "1" -- "1..*" Supplier : has
+Hospital "1" -- "1..*" Device : has
+Hospital "1" -- "1..*" Contract : has
+Hospital "1" -- "1" Inventory : has
+
+Supplier -- Contract : signs
+Inventory "1" -- "1..*" Device : contains
+
+@enduml

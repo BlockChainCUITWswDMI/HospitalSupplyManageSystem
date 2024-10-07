@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.WarehouseMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.pojo.Warehouse">
+            <id property="warehouseid" column="warehouseid" jdbcType="VARCHAR"/>
+            <result property="hospitalid" column="hospitalid" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="INTEGER"/>
+            <result property="addDate" column="add_date" jdbcType="DATE"/>
+            <result property="updateDate" column="update_date" jdbcType="DATE"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="instrumentid" column="instrumentid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        warehouseid,hospitalid,amount,
+        add_date,update_date,status,
+        instrumentid
+    </sql>
+    <update id="updateByWarehouseId">
+        update t_warehouse
+        set hospitalid=#{hospitalid},amount=#{amount},update_Date=#{updateDate},
+            status=#{status},instrumentid=#{instrumentid}
+        where warehouseid=#{warehouseid}
+    </update>
+
+    <delete id="deleteByWarehouseId" parameterType="java.lang.String">
+        delete from t_warehouse where warehouseid=#{warehouseid}
+    </delete>
+</mapper>

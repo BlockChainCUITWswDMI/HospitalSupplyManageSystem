@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuit.hospitalsupply.mapper.ContractMapper">
+
+    <resultMap id="BaseResultMap" type="com.cuit.hospitalsupply.pojo.Contract">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="contractid" column="contractid" jdbcType="VARCHAR"/>
+            <result property="whitelistid" column="whitelistid" jdbcType="VARCHAR"/>
+            <result property="supplierid" column="supplierid" jdbcType="VARCHAR"/>
+            <result property="hospitalid" column="hospitalid" jdbcType="VARCHAR"/>
+            <result property="deposit" column="deposit" jdbcType="INTEGER"/>
+            <result property="dedit" column="dedit" jdbcType="INTEGER"/>
+            <result property="createDate" column="create_date" jdbcType="DATE"/>
+            <result property="udi" column="udi" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="INTEGER"/>
+            <result property="orderid" column="orderid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,contractid,whitelistid,
+        supplierid,hospitalid,deposit,
+        dedit,createDate,udi,amount,orderid
+    </sql>
+</mapper>
